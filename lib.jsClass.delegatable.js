@@ -13,11 +13,10 @@ JS.Delegatable = new JS.Module({
 	
 		try {
 		
-			JS.Interface.ensure(inObject, (this.delegateProtocol || (this.klass && this.klass.delegateProtocol)));
+			JS.Interface.ensure(inObject, (this.klass && this.klass.delegateProtocol));
 		
 		} catch (exception) {
 		
-			mono.error(exception);
 			return false;
 		
 		}
