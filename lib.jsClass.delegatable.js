@@ -7,19 +7,23 @@
 
 JS.Delegatable = new JS.Module({
 
-	/* (void) */ setDelegate: function(inObject) {
+	/* (Boolean succeeded) */ setDelegate: function(inObject) {
+	
+		if (inObject === undefined) return false;
 	
 		try {
 		
-			JS.Interface.ensure(inObject, this.delegateProtocol);
+			JS.Interface.ensure(inObject, (this.delegateProtocol || (this.klass && this.klass.delegateProtocol)));
 		
 		} catch (exception) {
 		
-			return mono.die(mono.error(exception));
+			mono.error(exception);
+			return false;
 		
 		}
 		
 		this.delegate = inObject;
+		return true;
 		
 	}
 
