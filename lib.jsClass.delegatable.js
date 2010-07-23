@@ -7,23 +7,35 @@
 
 JS.Delegatable = new JS.Module({
 
-	/* (Boolean succeeded) */ setDelegate: function(inObject) {
+	extend: {
 	
-		if (inObject === undefined) return false;
-	
-		try {
+		extended: function (base) {
 		
-			JS.Interface.ensure(inObject, (this.klass && this.klass.delegateProtocol));
-		
-		} catch (exception) {
-		
-			return false;
+			base.extend({
+			
+				/* (Boolean succeeded) */ setDelegate: function(inObject) {
+				
+					if (inObject === undefined) return false;
+				
+					try {
+					
+						JS.Interface.ensure(inObject, (this.klass && this.klass.delegateProtocol));
+					
+					} catch (exception) {
+					
+						return false;
+					
+					}
+					
+					this.delegate = inObject;
+					return true;
+					
+				}
+			
+			});
 		
 		}
-		
-		this.delegate = inObject;
-		return true;
-		
+	
 	}
 
 });
